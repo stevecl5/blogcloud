@@ -27,25 +27,4 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/blob")
-    public String blobTest() {
-        System.out.println("blob test");
-        blobRepository.getContainerName();
-        return "redirect:/";
-    }
-
-    @GetMapping("/db")
-    public String dbTest() {
-        System.out.println("db test");
-        databaseRepository.listContainers();
-        return "redirect:/";
-    }
-
-    @GetMapping("/secret")
-    public String secretTest() {
-        System.out.println("secret test");
-        System.out.println(vaultSecret);
-        return "redirect:/";
-    }
-
 }

@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Blog Cloud</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>Form</h1>
+    <form th:action="@{'/test/form'}" method="post">
+        <p>
+            <label for="postTitle">Title:</label>
+            <input type="text" id="postTitle" name="postTitle">
+        </p>
+        <p>
+            <label for="postBody">Body:</label><br>
+            <textarea id="postBody" name="postBody" rows="4" cols="50"></textarea>
+        </p>
+        <p><input type="submit" name="action" value="Submit"></p>
+    </form>
+</body>
+</html>
