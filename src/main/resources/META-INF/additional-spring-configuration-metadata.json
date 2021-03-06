@@ -1,0 +1,12 @@
+{
+  "properties": [
+    {
+      "name": "azure.cosmos.secondary-key",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "azure.storage.container-url",
+      "type": "java.lang.String"
+    }
+  ]
+}
