@@ -1,8 +1,12 @@
+**/src/main/**/resources/application.properties
+**/src/test/
+
+### Maven ###
 HELP.md
 target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+.mvn
+mvnw
+mvnw.cmd
 
 ### Java ###
 *.class
