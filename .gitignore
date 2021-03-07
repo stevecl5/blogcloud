@@ -1,12 +1,10 @@
-**/src/main/resources/application.properties
-**/src/test/
-
 ### Maven ###
 HELP.md
 target/
 .mvn
 mvnw
 mvnw.cmd
+**/src/test/
 
 ### Java ###
 *.class
@@ -32,6 +30,7 @@ mvnw.cmd
 .settings
 .springBeans
 .sts4-cache
+application.properties
 
 ### IntelliJ IDEA ###
 .idea
