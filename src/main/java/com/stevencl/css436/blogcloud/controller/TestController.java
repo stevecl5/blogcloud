@@ -86,11 +86,13 @@ public class TestController {
         System.out.println(blogPost.getTitle());
         System.out.println();
 	    System.out.println("Body:");
-        System.out.println(blogPost.getBody());
+        System.out.println(blogPost.getBodyHtml());
         System.out.println();
 	    System.out.println("Secret Key is " + tinySecret);
 
-		return "tiny";
+	    model.addAttribute("postTitle", blogPost.getTitle());
+	    model.addAttribute("postBody", blogPost.getBodyHtml());
+		return "result";
 	}
 
 	

@@ -16,22 +16,54 @@ public class Post {
     @PartitionKey
     private String title;
     private String author;
-    private Date publishDate;
-    private Date lastEditDate;
-    private ArrayList<String> tags;
     private String bodyText;
     private String bodyHtml;
+//    private Date publishDate;
+//    private Date lastEditDate;
+//    private ArrayList<String> tags;
 
-    public String getBody() {
-      return bodyHtml;
+    public String getId() {
+        return id;
     }
+
     public String getTitle() {
-      return title;
+        return title;
     }
-	
-      public String toString() {
-      return ReflectionToStringBuilder.toString(this);
-    }	
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getBodyText() {
+        return bodyText;
+    }
+
+    public String getBodyHtml() {
+        return bodyHtml;
+    }
+
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setBodyText(String bodyText) {
+        this.bodyText = bodyText;
+    }
+
+    public void setBodyHtml(String bodyHtml) {
+        this.bodyHtml = bodyHtml;
+    }
 
 }
