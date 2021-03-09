@@ -35,7 +35,7 @@ public class MainController {
         for (var y : x.entrySet()) {
             System.out.println(y);
         }
-        return "index";
+        return "account";
     }
 
     private void initializeModel(Model model, OAuth2AuthenticationToken token) {
