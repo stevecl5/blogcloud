@@ -7,6 +7,6 @@
 </head>
 <body>
     <div th:replace="fragments/header :: navbar">...</div>
-    <p>Welcome to Blog Cloud. Enjoy your stay!</p>
+    <p th:text="${'Hello, ' + name + '!'}"></p>
 </body>
 </html>

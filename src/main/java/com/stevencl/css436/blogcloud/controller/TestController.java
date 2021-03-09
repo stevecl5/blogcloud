@@ -1,10 +1,12 @@
-package com.stevencl.css436.blogcloud;
+package com.stevencl.css436.blogcloud.controller;
+
+import com.stevencl.css436.blogcloud.model.ImageRepository;
+import com.stevencl.css436.blogcloud.model.UserRepository;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -15,33 +17,37 @@ public class TestController {
     @Value("${test-secret}")
     private String vaultSecret;
 
-    private final DatabaseRepository databaseRepository;
-    private final BlobRepository blobRepository;
+    private final UserRepository userRepository;
+    private final ImageRepository imageRepository;
 
-    public TestController(DatabaseRepository databaseRepository, BlobRepository blobRepository) {
-        this.databaseRepository = databaseRepository;
-        this.blobRepository = blobRepository;
+    public TestController(UserRepository userRepository, ImageRepository imageRepository) {
+        this.userRepository = userRepository;
+        this.imageRepository = imageRepository;
     }
 
     @GetMapping("/blob")
     public String blobTest() {
         System.out.println("blob test");
-        blobRepository.getContainerName();
-        return "redirect:/";
+        imageRepository.getContainerName();
+        return "forward:/";
     }
 
     @GetMapping("/db")
     public String dbTest() {
         System.out.println("db test");
-        databaseRepository.listContainers();
-        return "redirect:/";
+        var x = userRepository.findByDisplayName("bobby83");
+        var iter = x.iterator();
+        if (iter.hasNext()) {
+            System.out.println(iter.next().getDisplayName());
+        }
+        return "forward:/";
     }
 
     @GetMapping("/secret")
     public String secretTest() {
         System.out.println("secret test");
         System.out.println(vaultSecret);
-        return "redirect:/";
+        return "forward:/";
     }
 
     @GetMapping("/form")

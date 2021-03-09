@@ -3,8 +3,10 @@
 <head>
     <title>Blog Cloud</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <div th:insert="fragments/header :: style">...</div>
 </head>
 <body>
-<p th:text="${'Welcome to ' + blogId + '!'}">...</p>
+    <div th:replace="fragments/header :: navbar">...</div>
+    <p th:text="${'Welcome to ' + blogId + '!'}">...</p>
 </body>
 </html>

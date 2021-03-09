@@ -1,4 +1,4 @@
-package com.stevencl.css436.blogcloud;
+package com.stevencl.css436.blogcloud.config;
 
 import com.azure.spring.autoconfigure.b2c.AADB2COidcLoginConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,11 +9,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * https://docs.microsoft.com/en-us/azure/developer/java/spring-framework/configure-spring-boot-starter-java-app-with-azure-active-directory-b2c-oidc
  */
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final AADB2COidcLoginConfigurer configurer;
 
-    public WebSecurityConfig(AADB2COidcLoginConfigurer configurer) {
+    public SecurityConfig(AADB2COidcLoginConfigurer configurer) {
         this.configurer = configurer;
     }
 

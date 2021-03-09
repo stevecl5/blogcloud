@@ -1,4 +1,4 @@
-package com.stevencl.css436.blogcloud;
+package com.stevencl.css436.blogcloud.config;
 
 import com.azure.core.credential.AzureKeyCredential;
 import com.azure.cosmos.CosmosClientBuilder;
@@ -12,7 +12,6 @@ import com.azure.spring.data.cosmos.repository.config.EnableCosmosRepositories;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.Nullable;
 
@@ -27,22 +26,17 @@ public class DatabaseConfig extends AbstractCosmosConfiguration {
 
     @Value("${azure.cosmos.uri}")
     private String uri;
-
     @Value("${azure.cosmos.key}")
     private String key;
-
     @Value("${azure.cosmos.secondary-key}")
     private String secondaryKey;
-
     @Value("${azure.cosmos.database}")
     private String dbName;
-
     @Value("${azure.cosmos.populate-query-metrics}")
     private boolean populateQueryMetrics;
 
     private AzureKeyCredential azureKeyCredential;
 
-    @Bean
     public CosmosClientBuilder getCosmosClientBuilder() {
         this.azureKeyCredential = new AzureKeyCredential(key);
         DirectConnectionConfig directConnectionConfig = new DirectConnectionConfig();
@@ -63,6 +57,14 @@ public class DatabaseConfig extends AbstractCosmosConfiguration {
 
     public void switchToSecondaryKey() {
         this.azureKeyCredential.update(secondaryKey);
+    }
+
+    public void switchToPrimaryKey() {
+        this.azureKeyCredential.update(key);
+    }
+
+    public void switchKey(String key) {
+        this.azureKeyCredential.update(key);
     }
 
     @Override

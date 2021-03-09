@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Blog Cloud</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <div th:fragment="style">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/navbar.css}">
+    </div>
+</head>
+<body>
+    <div class="topnav" th:fragment="navbar">
+        <a class="active" th:href="@{/}">Home</a>
+        <a th:href="@{#}">Blog</a>
+        <a th:href="@{#}">About</a>
+        <a style="float:right" th:href="@{/account}">Account</a>
+    </div>
+</body>
+</html>
