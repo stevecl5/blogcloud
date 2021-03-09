@@ -29,12 +29,12 @@ public class MainController {
     @GetMapping("/account")
     public String account(Model model, OAuth2AuthenticationToken token) {
         initializeModel(model, token);
-        var x = token.getPrincipal().getAttributes();
-        var z = token.getPrincipal().getName();
-        System.out.println("name: " + z);
-        for (var y : x.entrySet()) {
-            System.out.println(y);
-        }
+        var name = token.getPrincipal().getName();
+        System.out.println("name: " + name);
+//        var x = token.getPrincipal().getAttributes();
+//        for (var y : x.entrySet()) {
+//            System.out.println(y);
+//        }
         return "account";
     }
 
