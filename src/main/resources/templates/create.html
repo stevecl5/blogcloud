@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Blog Cloud</title>
+    <script src="https://cdn.tiny.cloud/1/l8i1f3wbjsbhpaqy0ldpbm4rkdz0shmxcmgljk0it68y6z8k/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+</head>
+
+<body>
+<div class="container">
+
+    <form id="addEditForm" th:action="@{/test/create}" th:object="${blogPost}" method="POST">
+        <div class="row">
+            <div class="col-md-9">
+                <h1>Title</h1>
+                <div>
+                    <input type="text" class="form-control" style="width:100%" maxlength="128" th:field="*{title}" placeholder="Enter title here"/>
+                </div>
+            </div>
+        </div>
+                <h1>Body</h1>
+        <div class="row">
+            <div class="col-md-9"> 
+                <textarea th:field="*{bodyHtml}" style="width:100%; height:600px"></textarea>
+                <script>
+                    tinymce.init({
+                        selector: '#bodyHtml',
+                        plugins: 'link lists media code',
+                        toolbar: 'alignleft aligncenter alignright alignjustify | formatselect | bullist numlist | outdent indent | link code',
+                        toolbar_mode: 'floating',    
+                    });
+              </script>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <input type="submit" value="Save"/>
+            </div>
+        </div>    
+    </form>    
+</div>
+
+</body>
+</html>

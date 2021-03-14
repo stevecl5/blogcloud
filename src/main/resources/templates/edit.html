@@ -2,13 +2,14 @@
 <html lang="en-US" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Blog Cloud</title>
-    <script th:src="${tinyUrl}" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/l8i1f3wbjsbhpaqy0ldpbm4rkdz0shmxcmgljk0it68y6z8k/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
 </head>
 
 <body>
 <div class="container">
 
-    <form id="addEditForm" th:action="@{/test/tiny}" th:object="${blogPost}" method="POST">
+    <form id="addEditForm" th:action="@{'/test/edit/' + ${postId}}" th:object="${blogPost}" method="POST">
         <div class="row">
             <div class="col-md-9">
                 <h1>Title</h1>
@@ -26,7 +27,7 @@
                         selector: '#bodyHtml',
                         plugins: 'link lists media code',
                         toolbar: 'alignleft aligncenter alignright alignjustify | formatselect | bullist numlist | outdent indent | link code',
-                        toolbar_mode: 'floating'
+                        toolbar_mode: 'floating',    
                     });
               </script>
             </div>
