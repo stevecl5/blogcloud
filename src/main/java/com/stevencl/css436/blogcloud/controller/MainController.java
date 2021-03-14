@@ -14,8 +14,6 @@ public class MainController {
         return "index";
     }
 
-    // TODO: add exception handlers for 400 and 500 errors
-
     protected static void initializeModel(Model model, OAuth2AuthenticationToken token) {
         if (token != null) {
             final OAuth2User user = token.getPrincipal();
