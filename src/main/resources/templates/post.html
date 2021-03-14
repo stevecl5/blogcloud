@@ -7,6 +7,6 @@
 </head>
 <body>
     <div th:replace="fragments/header :: navbar">...</div>
-    <p th:text="${'Title: ' + postId}">...</p>
+    <p th:text="${'Title: ' + post.getTitle()}">...</p>
 </body>
 </html>
