@@ -2,8 +2,7 @@
 <html lang="en-US" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Blog Cloud</title>
-    <script src="https://cdn.tiny.cloud/1/l8i1f3wbjsbhpaqy0ldpbm4rkdz0shmxcmgljk0it68y6z8k/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-
+    <script th:src="${tinyUrl}" referrerpolicy="origin"></script>
 </head>
 
 <body>
@@ -27,7 +26,7 @@
                         selector: '#bodyHtml',
                         plugins: 'link lists media code',
                         toolbar: 'alignleft aligncenter alignright alignjustify | formatselect | bullist numlist | outdent indent | link code',
-                        toolbar_mode: 'floating',    
+                        toolbar_mode: 'floating'
                     });
               </script>
             </div>
