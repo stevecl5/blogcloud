@@ -2,6 +2,7 @@ package com.stevencl.css436.blogcloud.model;
 
 import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.springframework.data.annotation.Id;
 
 import java.time.OffsetDateTime;
@@ -35,6 +36,10 @@ public class Blog {
 
     public OffsetDateTime getCreatedDate() {
         return createdDate;
+    }
+
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
     }
 
     public void setId(String id) {
