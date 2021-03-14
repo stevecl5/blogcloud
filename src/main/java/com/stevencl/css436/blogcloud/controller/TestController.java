@@ -11,8 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Optional;
+import java.util.HashMap;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -24,6 +26,8 @@ public class TestController {
 
     @Value("${tiny.secret-key}")
     private String tinySecret;
+    
+    private HashMap<Integer, Post> testMap = new HashMap<Integer, Post>();
 
     private final BlogRepository blogRepository;
     private final PostRepository postRepository;
@@ -81,32 +85,55 @@ public class TestController {
         return "result";
     }
 
-    @GetMapping("/tiny")
-	public String addEditPost(Model model, @RequestParam("blogPostId") Optional<String> blogPostId) {
+    @GetMapping("/create")
+	public String addEditPost(Model model) {		
+
         setDefaultBlogPost(model);
-        model.addAttribute("tinyUrl", tinySecret);
-		return "tiny";
+		return "create";
 	}
 	
 
-	@PostMapping("/tiny")
+	@PostMapping("/create")
 	public String addEditPostSubmit(Model model, Post blogPost) {
-        System.out.println("Title:");
-        System.out.println(blogPost.getTitle());
-        System.out.println();
-	    System.out.println("Body:");
-        System.out.println(blogPost.getBodyHtml());
-        System.out.println();
-	    System.out.println("Secret Key is " + tinySecret);
+        blogPost.setTestId(blogPost.getTestId() - 1);
+        blogPost.decrementCount();
 
-	    model.addAttribute("postTitle", blogPost.getTitle());
-	    model.addAttribute("postBody", blogPost.getBodyHtml());
+        int id = blogPost.getTestId();
+        testMap.put(id, blogPost);
+
+        model.addAttribute("testMap", testMap);
 		return "result";
 	}
 
+    @GetMapping("/editPage")
+    public String editPage(Model model) {
+        model.addAttribute("testMap", testMap);
+        return "editPage";
+    }
+
+    @GetMapping("/edit/{postId}") 
+    public String editPost(Model model, @PathVariable("postId") int postId) {
+        Post blogPost = testMap.get(postId);
+
+        model.addAttribute("blogPost", blogPost);
+        model.addAttribute("postId", postId);
+        return "edit";
+    }
+
+    @PostMapping("/edit/{postId}")
+    public String editPostSubmit(Model model, Post blogPost, @PathVariable("postId") int postId) {
+        
+        blogPost.setTestId(postId);
+        blogPost.decrementCount();
+        testMap.replace(postId, blogPost);
+        model.addAttribute("testMap", testMap);
+       
+        return "result";
+    }
 	
 	private void setDefaultBlogPost(Model model) {
-		Post blogPost = new Post();		
+		Post blogPost = new Post();	
 		model.addAttribute("blogPost", blogPost);
+
 	}
 }
