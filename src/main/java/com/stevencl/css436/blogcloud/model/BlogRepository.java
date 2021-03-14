@@ -4,6 +4,6 @@ import com.azure.spring.data.cosmos.repository.CosmosRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends CosmosRepository<User, String> {
-    Iterable<User> findByDisplayName(String displayName);
+public interface BlogRepository extends CosmosRepository<Blog, String> {
+    Iterable<Blog> findByAuthor(String author);
 }

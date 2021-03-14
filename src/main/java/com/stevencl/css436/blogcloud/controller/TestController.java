@@ -1,8 +1,9 @@
 package com.stevencl.css436.blogcloud.controller;
 
+import com.stevencl.css436.blogcloud.model.BlogRepository;
 import com.stevencl.css436.blogcloud.model.ImageRepository;
-import com.stevencl.css436.blogcloud.model.UserRepository;
 import com.stevencl.css436.blogcloud.model.Post;
+import com.stevencl.css436.blogcloud.model.PostRepository;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -24,11 +25,14 @@ public class TestController {
     @Value("${tiny.secret-key}")
     private String tinySecret;
 
-    private final UserRepository userRepository;
+    private final BlogRepository blogRepository;
+    private final PostRepository postRepository;
     private final ImageRepository imageRepository;
 
-    public TestController(UserRepository userRepository, ImageRepository imageRepository) {
-        this.userRepository = userRepository;
+    public TestController(BlogRepository blogRepository, PostRepository postRepository,
+                          ImageRepository imageRepository) {
+        this.blogRepository = blogRepository;
+        this.postRepository = postRepository;
         this.imageRepository = imageRepository;
     }
 
@@ -42,10 +46,10 @@ public class TestController {
     @GetMapping("/db")
     public String dbTest() {
         System.out.println("db test");
-        var x = userRepository.findByDisplayName("bobby83");
+        var x = blogRepository.findByAuthor("bobby83");
         var iter = x.iterator();
         if (iter.hasNext()) {
-            System.out.println(iter.next().getDisplayName());
+            System.out.println(iter.next());
         }
         return "forward:/";
     }
@@ -73,9 +77,9 @@ public class TestController {
     }
 
     @GetMapping("/tiny")
-	public String addEditPost(Model model, @RequestParam("blogPostId") Optional<String> blogPostId) {		
-
-        setDefaultBlogPost(model);					
+	public String addEditPost(Model model, @RequestParam("blogPostId") Optional<String> blogPostId) {
+        setDefaultBlogPost(model);
+        model.addAttribute("tinyUrl", tinySecret);
 		return "tiny";
 	}
 	

@@ -1,45 +1,52 @@
 package com.stevencl.css436.blogcloud.model;
 
 import com.azure.spring.data.cosmos.core.mapping.Container;
+import com.azure.spring.data.cosmos.core.mapping.GeneratedValue;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
-import org.springframework.data.annotation.Id;
-
-import java.util.ArrayList;
-import java.util.Date;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import java.time.OffsetDateTime;
 
 @Container(containerName = "posts")
 public class Post {
 
     @Id
+    @GeneratedValue
     private String id;
     @PartitionKey
+    private String blogId;
     private String title;
-    private String author;
-    private String bodyText;
     private String bodyHtml;
-//    private Date publishDate;
-//    private Date lastEditDate;
-//    private ArrayList<String> tags;
+    @CreatedDate
+    private OffsetDateTime createdDate;
+    @LastModifiedDate
+    private OffsetDateTime lastModifiedDate;
 
     public String getId() {
         return id;
+    }
+
+    public String getBlogId() {
+        return blogId;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public String getBodyText() {
-        return bodyText;
-    }
-
     public String getBodyHtml() {
         return bodyHtml;
+    }
+
+    public OffsetDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public OffsetDateTime getLastModifiedDate() {
+        return lastModifiedDate;
     }
 
     public String toString() {
@@ -50,20 +57,24 @@ public class Post {
         this.id = id;
     }
 
+    public void setBlogId(String userId) {
+        this.blogId = userId;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public void setBodyText(String bodyText) {
-        this.bodyText = bodyText;
-    }
-
     public void setBodyHtml(String bodyHtml) {
         this.bodyHtml = bodyHtml;
+    }
+
+    public void setCreatedDate(OffsetDateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public void setLastModifiedDate(OffsetDateTime lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 
 }
