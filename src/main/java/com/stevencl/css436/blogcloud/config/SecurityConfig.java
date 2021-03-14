@@ -47,8 +47,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             blogRepository.save(blog);
             System.out.println("created blog: " + oid);
         } else {
-            // update blog author if display name is different
+            // add blog if user doesn't have one
+            // TODO: this feature should be removed in production
             var result = blogRepository.findById(oid);
+            if (result.isEmpty()) {
+                var blog = new Blog(oid, displayName);
+                blogRepository.save(blog);
+                System.out.println("created blog: " + oid);
+            }
+            // update blog author if display name is different
             var blog = result.orElse(null);
             if (blog != null && displayName != null && !displayName.equals(blog.getAuthor())) {
                 blog.setAuthor(displayName);
