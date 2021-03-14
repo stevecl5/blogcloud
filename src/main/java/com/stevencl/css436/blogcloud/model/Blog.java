@@ -2,7 +2,6 @@ package com.stevencl.css436.blogcloud.model;
 
 import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 
 import java.time.OffsetDateTime;
@@ -14,16 +13,16 @@ public class Blog {
     private String id;
     @PartitionKey
     private String author;
-    @CreatedDate
-    private OffsetDateTime createdDate;
+    private final OffsetDateTime createdDate;
 
     public Blog() {
-        // default constructor
+        this(null, null);
     }
 
     public Blog(String id, String author) {
         this.id = id;
         this.author = author;
+        this.createdDate = OffsetDateTime.now();
     }
 
     public String getId() {
@@ -32,6 +31,10 @@ public class Blog {
 
     public String getAuthor() {
         return author;
+    }
+
+    public OffsetDateTime getCreatedDate() {
+        return createdDate;
     }
 
     public void setId(String id) {

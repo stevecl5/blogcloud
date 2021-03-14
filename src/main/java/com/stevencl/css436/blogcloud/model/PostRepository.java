@@ -5,5 +5,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PostRepository extends CosmosRepository<Post, String> {
+    Iterable<Post> findByBlogId(String title);
     Iterable<Post> findByTitle(String title);
 }

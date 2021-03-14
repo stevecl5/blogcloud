@@ -46,11 +46,16 @@ public class TestController {
     @GetMapping("/db")
     public String dbTest() {
         System.out.println("db test");
-        var x = blogRepository.findByAuthor("bobby83");
-        var iter = x.iterator();
-        if (iter.hasNext()) {
-            System.out.println(iter.next());
-        }
+//        var x = blogRepository.findByAuthor("bobby83");
+//        var iter = x.iterator();
+//        if (iter.hasNext()) {
+//            System.out.println(iter.next());
+//        }
+        var post = new Post();
+        post.setBlogId("1234");
+        post.setTitle("title");
+        post.setBodyHtml("<p>blah blah</p>");
+        postRepository.save(post);
         return "forward:/";
     }
 

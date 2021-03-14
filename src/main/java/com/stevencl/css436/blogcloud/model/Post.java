@@ -4,9 +4,7 @@ import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.GeneratedValue;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.OffsetDateTime;
 
@@ -20,10 +18,19 @@ public class Post {
     private String blogId;
     private String title;
     private String bodyHtml;
-    @CreatedDate
-    private OffsetDateTime createdDate;
-    @LastModifiedDate
+    private final OffsetDateTime createdDate;
     private OffsetDateTime lastModifiedDate;
+
+    public Post() {
+        this(null, null, null);
+    }
+
+    public Post(String blogId, String title, String bodyHtml) {
+        this.blogId = blogId;
+        this.title = title;
+        this.bodyHtml = bodyHtml;
+        this.createdDate = OffsetDateTime.now();
+    }
 
     public String getId() {
         return id;
@@ -69,12 +76,8 @@ public class Post {
         this.bodyHtml = bodyHtml;
     }
 
-    public void setCreatedDate(OffsetDateTime createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public void setLastModifiedDate(OffsetDateTime lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
+    public void setLastModifiedDate() {
+        this.lastModifiedDate = OffsetDateTime.now();
     }
 
 }
