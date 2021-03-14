@@ -1,5 +1,7 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en" >
 <head>
     <title>Blog Cloud</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -10,9 +12,16 @@
 <body>
     <div class="topnav" th:fragment="navbar">
         <a class="active" th:href="@{/}">Home</a>
-        <a th:href="@{#}">Blog</a>
+        <a th:href="@{#}">Blogs</a>
         <a th:href="@{#}">About</a>
-        <a style="float:right" th:href="@{/account}">Account</a>
+        <div sec:authorize="isAnonymous()" style="float:right">
+            <a th:href="@{/myblog}">Login</a>
+            <a th:href="@{/myblog/create}">Create Blog</a>
+        </div>
+        <div sec:authorize="isAuthenticated()" style="float:right">
+            <a th:href="@{/logout}">Logout</a>
+            <a th:href="@{/myblog}">My Blog</a>
+        </div>
     </div>
 </body>
 </html>
