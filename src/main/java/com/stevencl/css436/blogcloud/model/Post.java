@@ -11,8 +11,6 @@ import java.time.OffsetDateTime;
 @Container(containerName = "posts")
 public class Post {
 
-    private static int count = 0;
-    private int testId;
     @Id
     @GeneratedValue
     private String id;
@@ -25,8 +23,6 @@ public class Post {
 
     public Post() {
         this(null, null, null);
-        this.testId = count;
-        count++;
     }
 
     public Post(String blogId, String title, String bodyHtml) {
@@ -34,21 +30,6 @@ public class Post {
         this.title = title;
         this.bodyHtml = bodyHtml;
         this.createdDate = OffsetDateTime.now();
-    }
-
-    public int getTestId() {
-        return testId;
-    }
-    public void setTestId(int testId) {
-        this.testId = testId;
-    }
-
-    public void decrementCount() {
-        count--;
-    }
-
-    public int getCount() {
-        return count;
     }
     
     public String getId() {
@@ -83,8 +64,8 @@ public class Post {
         this.id = id;
     }
 
-    public void setBlogId(String userId) {
-        this.blogId = userId;
+    public void setBlogId(String blogId) {
+        this.blogId = blogId;
     }
 
     public void setTitle(String title) {

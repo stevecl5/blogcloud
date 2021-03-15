@@ -16,7 +16,7 @@
         <a th:href="@{#}">About</a>
         <div sec:authorize="isAnonymous()" style="float:right">
             <a th:href="@{/myblog}">Login</a>
-            <a th:href="@{/myblog/create}">Create Blog</a>
+            <a th:href="@{/myblog/join}">Create Blog</a>
         </div>
         <div sec:authorize="isAuthenticated()" style="float:right">
             <a th:href="@{/logout}">Logout</a>

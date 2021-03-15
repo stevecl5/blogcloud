@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Blog Cloud</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <div th:insert="fragments/header :: style">...</div>
+</head>
+<body>
+    <div th:replace="fragments/header :: navbar">...</div>
+    <p><a th:href="@{'/myblog/create'}">Create new blog post</a></p>
+    <h2>My Posts</h2>
+    <table>
+        <tr th:each="post: ${posts}">
+            <td><span th:text="${post.getTitle()}">Title</span></td>
+            <td><a th:href="@{'/blog/' + ${post.getBlogId() + '/' + post.getId()}}">View</a></td>
+            <td><a th:href="@{'/myblog/edit/' + ${post.getId()}}">Edit</a></td>
+        </tr>
+    </table>
+</body>
+</html>

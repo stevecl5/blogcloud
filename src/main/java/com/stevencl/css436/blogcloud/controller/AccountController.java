@@ -5,15 +5,13 @@ import com.stevencl.css436.blogcloud.model.ImageRepository;
 import com.stevencl.css436.blogcloud.model.Post;
 import com.stevencl.css436.blogcloud.model.PostRepository;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.util.ArrayList;
@@ -21,6 +19,9 @@ import java.util.ArrayList;
 @Controller
 @RequestMapping("/myblog")
 public class AccountController {
+
+    @Value("${tiny.secret-key}")
+    private String tinyUrl;
 
     private final BlogRepository blogRepository;
     private final PostRepository postRepository;
@@ -44,38 +45,59 @@ public class AccountController {
         model.addAttribute("blog", blogRepository);
         // lookup posts by blogId
         var foundPosts = postRepository.findByBlogId(oid);
+        // TODO: Sort posts in descending order
         ArrayList<Post> posts = new ArrayList<>();
         foundPosts.iterator().forEachRemaining(posts::add);
         model.addAttribute("posts", posts);
-        return "account";
+        return "myblog";
     }
 
-    @GetMapping("/create")
-    public String createBlog() {
+    @GetMapping("/join")
+    public String join() {
         return "redirect:/myblog";
     }
 
-    @GetMapping("/edit")
-    public String editPost(@RequestParam String postId, OAuth2AuthenticationToken token,
-                           Model model) throws NoHandlerFoundException{
+    @GetMapping("/create")
+    public String createPost(Model model, OAuth2AuthenticationToken token) {
         var user = token.getPrincipal();
         var oid = user.getName();
+        Post blogPost = new Post();
+        blogPost.setBlogId(oid);
+        System.out.println(oid);
+        System.out.println(blogPost);
+        model.addAttribute("blogPost", blogPost);
+        model.addAttribute("tinyUrl", tinyUrl);
+        model.addAttribute("submitPath", "/myblog/create");
+        return "edit";
+    }
 
+    @GetMapping("/edit/{postId}")
+    public String editPost(@PathVariable String postId, OAuth2AuthenticationToken token,
+                           Model model) throws Exception {
+        var user = token.getPrincipal();
+        var oid = user.getName();
         // lookup post by postId
         var result = postRepository.findById(postId);
         // 404 if not found
         if (result.isEmpty()) {
-            throw new NoHandlerFoundException("GET", "/myblog/edit?postId=" + postId, new HttpHeaders());
+            throw new NoHandlerFoundException("GET", "/myblog/edit/" + postId, new HttpHeaders());
         }
-        var post = result.get();
+        var blogPost = result.get();
         // 403 if post doesn't belong to this user
-        if (!oid.equals(post.getBlogId())) {
+        if (!oid.equals(blogPost.getBlogId())) {
             throw new AccessDeniedException("403 Access Denied");
         }
-        model.addAttribute("post", post);
-        System.out.println(postId);
-        return "redirect:/myblog";
+        model.addAttribute("blogPost", blogPost);
+        model.addAttribute("tinyUrl", tinyUrl);
+        model.addAttribute("submitPath", "/myblog/edit");
+        return "edit";
     }
 
+    @PostMapping(value = {"/create", "/edit"})
+    public String addEditPostSubmit(@ModelAttribute Post blogPost) {
+        System.out.println(blogPost);
+        postRepository.save(blogPost);
+        return "redirect:/myblog";
+    }
 
 }
