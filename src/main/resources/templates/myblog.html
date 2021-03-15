@@ -7,6 +7,7 @@
 </head>
 <body>
     <div th:replace="fragments/header :: navbar">...</div>
+    <p th:text="${'Hello, ' + blog.getAuthor() + '!'}"></p>
     <p><a th:href="@{'/myblog/create'}">Create new blog post</a></p>
     <h2>My Posts</h2>
     <table>
