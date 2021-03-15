@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+        String imageUrl = "https://blogcloud.blob.core.windows.net/images/blogcloud-small.jpg";
+        model.addAttribute("imageUrl", imageUrl);
         return "index";
     }
 
