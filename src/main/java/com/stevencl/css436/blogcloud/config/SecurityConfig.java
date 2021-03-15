@@ -47,7 +47,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             System.out.println("created blog: " + oid);
         } else {
             // add blog if user doesn't have one
-            // TODO: this feature should be removed in production
             var result = blogRepository.findById(oid);
             if (result.isEmpty()) {
                 var blog = new Blog(oid, displayName);

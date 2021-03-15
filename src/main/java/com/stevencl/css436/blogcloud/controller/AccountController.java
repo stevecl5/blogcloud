@@ -45,7 +45,6 @@ public class AccountController {
         model.addAttribute("blog", blog);
         // lookup posts by blogId
         var foundPosts = postRepository.findByBlogId(oid);
-        // TODO: Sort posts in descending order
         ArrayList<Post> posts = new ArrayList<>();
         foundPosts.iterator().forEachRemaining(posts::add);
         model.addAttribute("posts", posts);
