@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Blog Cloud</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <div th:insert="fragments/header :: style">...</div>
+</head>
+<body>
+    <div th:replace="fragments/header :: navbar">...</div>
+    <p> Are you sure you want to delete this post? </p>
+    
+    <form id="deleteForm" th:action="@{'/myblog/delete/' + ${postId}}" th:object="${blogPost}" method="POST">
+        
+        <input type="hidden" th:field="*{blogId}">
+        <input type="hidden" th:field="*{id}">
+
+        <input type="submit" value="Yes, delete it."/>
+    </form>
+
+    <p></p>
+
+    <a th:href="@{'/myblog/'}">No, go back!</a>
+
+</body>
+</html>

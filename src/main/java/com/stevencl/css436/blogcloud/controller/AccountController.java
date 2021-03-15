@@ -100,4 +100,33 @@ public class AccountController {
         return "redirect:/myblog";
     }
 
+    @GetMapping("/delete/{postId}") 
+    public String deletePost(@PathVariable String postId, OAuth2AuthenticationToken token,
+                            Model model) throws Exception{
+
+        var user = token.getPrincipal();
+        var oid = user.getName();
+        
+        var result = postRepository.findById(postId);
+        // 404 if not found
+        if (result.isEmpty()) {
+            throw new NoHandlerFoundException("GET", "/myblog/edit/" + postId, new HttpHeaders());
+        }
+        var blogPost = result.get();
+        // 403 if post doesn't belong to this user
+        if (!oid.equals(blogPost.getBlogId())) {
+            throw new AccessDeniedException("403 Access Denied");
+        }
+        model.addAttribute("blogPost", blogPost);
+        
+        return "delete";
+    }
+
+    @PostMapping("/delete/{postId}")
+    public String deletePostSubmit(@ModelAttribute Post blogPost) {
+        System.out.println(blogPost);
+        postRepository.delete(blogPost);
+        return "redirect:/myblog";
+    }
+
 }
