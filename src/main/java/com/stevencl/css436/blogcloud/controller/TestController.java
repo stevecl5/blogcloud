@@ -68,19 +68,4 @@ public class TestController {
         return "forward:/";
     }
 
-    @GetMapping("/form")
-    public String formEntry() {
-        System.out.println("form entry");
-        return "entry";
-    }
-
-    @PostMapping("/form")
-    public String formResult(String postTitle, String postBody, Model model) {
-        System.out.println("form results");
-        System.out.println(postBody);
-        model.addAttribute("postTitle", postTitle);
-        model.addAttribute("postBody", postBody);
-        return "result";
-    }
-
 }

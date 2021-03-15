@@ -1,8 +1,6 @@
 package com.stevencl.css436.blogcloud.controller;
 
-import com.stevencl.css436.blogcloud.model.BlogRepository;
-import com.stevencl.css436.blogcloud.model.ImageRepository;
-import com.stevencl.css436.blogcloud.model.PostRepository;
+import com.stevencl.css436.blogcloud.model.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.NoHandlerFoundException;
+
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/blog")
@@ -36,7 +36,11 @@ public class BlogController {
         }
         var blog = result.get();
         model.addAttribute("blog", blog);
-        System.out.println("blogId: " + blogId);
+        // lookup posts by blogId
+        var foundPosts = postRepository.findByBlogId(blogId);
+        ArrayList<Post> posts = new ArrayList<>();
+        foundPosts.iterator().forEachRemaining(posts::add);
+        model.addAttribute("posts", posts);
         return "blog";
     }
 

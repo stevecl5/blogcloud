@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Blog Cloud</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <div th:insert="fragments/header :: style">...</div>
+</head>
+<body>
+    <div th:replace="fragments/header :: navbar">...</div>
+    <h2>Find a blog</h2>
+    <form th:action="@{'/find/blog'}" method="POST">
+        <p>
+            <label for="author">Author:</label>
+            <input type="text" name="author" id="author">
+        </p>
+        <p>
+            <button type="submit" name="action" value="query">Search</button>
+        </p>
+    </form>
+    <table th:if="${blogs != null}">
+        <tr th:each="blog: ${blogs}">
+            <td><span th:text="${blog.getAuthor()}">Author</span></td>
+            <td><a th:href="@{'/blog/' + ${blog.getId()}}">View</a></td>
+        </tr>
+    </table>
+</body>
+</html>

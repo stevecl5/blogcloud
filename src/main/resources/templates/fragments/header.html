@@ -12,8 +12,8 @@
 <body>
     <div class="topnav" th:fragment="navbar">
         <a class="active" th:href="@{/}">Home</a>
-        <a th:href="@{#}">Blogs</a>
-        <a th:href="@{#}">About</a>
+        <a th:href="@{/find/blog}">Blogs</a>
+        <a th:href="@{/find/post}">Posts</a>
         <div sec:authorize="isAnonymous()" style="float:right">
             <a th:href="@{/myblog}">Login</a>
             <a th:href="@{/myblog/join}">Create Blog</a>

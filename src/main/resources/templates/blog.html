@@ -7,6 +7,12 @@
 </head>
 <body>
     <div th:replace="fragments/header :: navbar">...</div>
-    <p th:text="${'Welcome to ' + blogId + '!'}">...</p>
+    <p th:text="${'Welcome to ' + blog.getAuthor() + '''s blog!'}">...</p>
+    <table th:if="${posts != null}">
+        <tr th:each="post: ${posts}">
+            <td><span th:text="${post.getTitle()}">Title</span></td>
+            <td><a th:href="@{'/blog/' + ${post.getBlogId() + '/' + post.getId()}}">View</a></td>
+        </tr>
+    </table>
 </body>
 </html>
