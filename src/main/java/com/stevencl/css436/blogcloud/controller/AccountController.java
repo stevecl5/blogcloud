@@ -20,7 +20,7 @@ import java.util.ArrayList;
 @RequestMapping("/myblog")
 public class AccountController {
 
-    @Value("${tiny.secret-key}")
+    @Value("${tinymce-url}")
     private String tinyUrl;
 
     private final BlogRepository blogRepository;
@@ -42,7 +42,7 @@ public class AccountController {
         var oid = user.getName();
         var foundBlog = blogRepository.findById(oid);
         var blog = foundBlog.orElse(null);
-        model.addAttribute("blog", blogRepository);
+        model.addAttribute("blog", blog);
         // lookup posts by blogId
         var foundPosts = postRepository.findByBlogId(oid);
         // TODO: Sort posts in descending order
