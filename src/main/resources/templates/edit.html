@@ -9,9 +9,11 @@
     <div th:replace="fragments/header :: navbar">...</div>
     <div class="container">
         <form id="addEditForm" th:action="@{${submitPath}}" th:object="${blogPost}" method="POST">
-            <input type="hidden" th:field="*{id}">
             <input type="hidden" th:field="*{blogId}">
-            <input type="hidden" th:field="*{createdDate}">
+            <div th:if="*{!isNew()}">
+                <input type="hidden" th:field="*{id}">
+                <input type="hidden" th:field="*{createdDate}">
+            </div>
             <div class="row">
                 <div class="col-md-9">
                     <h1>Title</h1>

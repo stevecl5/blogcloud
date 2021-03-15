@@ -80,4 +80,8 @@ public class Post {
         this.lastModifiedDate = OffsetDateTime.now();
     }
 
+    public boolean isNew() {
+        return id == null;
+    }
+
 }
