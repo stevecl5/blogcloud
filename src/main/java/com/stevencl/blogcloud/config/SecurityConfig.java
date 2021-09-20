@@ -1,7 +1,7 @@
-package com.stevencl.css436.blogcloud.config;
+package com.stevencl.blogcloud.config;
 
-import com.stevencl.css436.blogcloud.model.Blog;
-import com.stevencl.css436.blogcloud.model.BlogRepository;
+import com.stevencl.blogcloud.model.Blog;
+import com.stevencl.blogcloud.model.BlogRepository;
 
 import com.azure.spring.autoconfigure.b2c.AADB2COidcLoginConfigurer;
 import org.springframework.context.event.EventListener;

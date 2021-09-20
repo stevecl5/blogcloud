@@ -1,4 +1,4 @@
-package com.stevencl.css436.blogcloud.config;
+package com.stevencl.blogcloud.config;
 
 import com.azure.core.credential.AzureKeyCredential;
 import com.azure.cosmos.CosmosClientBuilder;

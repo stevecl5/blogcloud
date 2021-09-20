@@ -1,9 +1,9 @@
-package com.stevencl.css436.blogcloud.controller;
+package com.stevencl.blogcloud.controller;
 
-import com.stevencl.css436.blogcloud.model.Blog;
-import com.stevencl.css436.blogcloud.model.BlogRepository;
-import com.stevencl.css436.blogcloud.model.Post;
-import com.stevencl.css436.blogcloud.model.PostRepository;
+import com.stevencl.blogcloud.model.BlogRepository;
+import com.stevencl.blogcloud.model.Post;
+import com.stevencl.blogcloud.model.Blog;
+import com.stevencl.blogcloud.model.PostRepository;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

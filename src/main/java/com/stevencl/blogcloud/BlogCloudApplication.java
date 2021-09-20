@@ -1,4 +1,4 @@
-package com.stevencl.css436.blogcloud;
+package com.stevencl.blogcloud;
 
 import com.azure.spring.data.cosmos.repository.config.EnableCosmosRepositories;
 import org.springframework.boot.SpringApplication;

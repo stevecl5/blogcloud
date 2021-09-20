@@ -8,7 +8,7 @@
         <version>2.3.9.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.stevencl.css436</groupId>
+    <groupId>com.stevencl</groupId>
     <artifactId>blogcloud</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>

@@ -1,4 +1,4 @@
-package com.stevencl.css436.blogcloud.controller;
+package com.stevencl.blogcloud.controller;
 
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;

@@ -1,4 +1,4 @@
-package com.stevencl.css436.blogcloud.model;
+package com.stevencl.blogcloud.model;
 
 import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
